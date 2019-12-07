@@ -1,0 +1,12 @@
+import 'reflect-metadata';
+import { Connection, ObjectType } from 'typeorm';
+import { Factory, FactoryFunction, SeederConstructor } from './types';
+export * from './importer';
+export * from './connection';
+export { Factory, Seeder } from './types';
+export { times } from './helpers';
+export declare const setConnection: (connection: Connection) => Connection;
+export declare const getConnection: () => any;
+export declare const define: <Entity, Settings>(entity: ObjectType<Entity>, factoryFn: FactoryFunction<Entity, Settings>) => void;
+export declare const factory: Factory;
+export declare const runSeeder: (clazz: SeederConstructor) => Promise<void>;
