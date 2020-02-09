@@ -296,11 +296,11 @@ class SeedCommand {
         return args
             .option('config', {
             default: 'ormconfig.js',
-            describe: 'Path to the typeorm config file (json or js).'
+            describe: 'Path to the typeorm config file (json or js).',
         })
             .option('class', {
             alias: 'c',
-            describe: 'Specific seed class to run.'
+            describe: 'Specific seed class to run.',
         });
     }
     handler(args) {
@@ -312,7 +312,7 @@ class SeedCommand {
             try {
                 options = yield getConnectionOptions(args.config);
                 if (Array.isArray(options)) {
-                    options.forEach((item) => {
+                    options.forEach(item => {
                         if (item.name === 'default') {
                             options = item;
                         }
@@ -337,8 +337,9 @@ class SeedCommand {
             let seedFileObjects = [];
             try {
                 seedFileObjects = seedFiles
-                    .map((seedFile) => importSeed(seedFile))
-                    .filter((seedFileObject) => args.class === undefined || args.class === seedFileObject.name);
+                    .map(seedFile => importSeed(seedFile))
+                    .filter(seedFileObject => args.class === undefined || args.class === seedFileObject.name);
+                seedFileObjects = seedFileObjects.filter(t => t !== undefined);
                 spinner.succeed('Seeders are imported');
             }
             catch (error) {
